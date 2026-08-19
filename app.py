@@ -14,11 +14,19 @@ import os
 # Read the API key from API.txt
 api_key_path = "E:\Krishisamadhan\API.txt"
 
-if os.path.exists(api_key_path):
-    with open(api_key_path, "r") as f:
+# 1. Check Streamlit Secrets for "groq_api_key"
+if "groq_api_key" in st.secrets:
+    groq_api_key = st.secrets["groq_api_key"]
+# 2. Check environment variables
+elif os.environ.get("groq_api_key"):
+    groq_api_key = os.environ.get("groq_api_key")
+# 3. Fallback to local API.txt (for local testing)
+elif os.path.exists(r"E:\Krishisamadhan\API.txt"):
+    with open(r"E:\Krishisamadhan\API.txt", "r") as f:
         groq_api_key = f.read().strip()
 else:
-    raise FileNotFoundError(f"Key file '{api_key_path}' not found.")
+    st.error("GROQ API Key missing! Add 'groq_api_key' to Streamlit Secrets.")
+    st.stop()
 
 # Pass the variable to your client initialization
 # Example: client = Groq(api_key=groq_api_key)
