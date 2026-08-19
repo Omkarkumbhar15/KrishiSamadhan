@@ -4,11 +4,24 @@ import faiss
 import numpy as np
 from sentence_transformers import SentenceTransformer
 from groq import Groq
+import os
 
 # ================================
 # CONFIG
 # ================================
-GROQ_API_KEY = "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"
+
+
+# Read the API key from API.txt
+api_key_path = "E:\Krishisamadhan\API.txt"
+
+if os.path.exists(api_key_path):
+    with open(api_key_path, "r") as f:
+        groq_api_key = f.read().strip()
+else:
+    raise FileNotFoundError(f"Key file '{api_key_path}' not found.")
+
+# Pass the variable to your client initialization
+# Example: client = Groq(api_key=groq_api_key)
 FAISS_PATH = "data/vector_store/faiss_index.bin"
 METADATA_PATH = "data/vector_store/metadata.json"
 
@@ -31,7 +44,7 @@ def load_embed_model():
 embed_model = load_embed_model()
 # ⚠️ DO NOT CACHE
 embed_model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
-client = Groq(api_key=GROQ_API_KEY)
+client = Groq(api_key=groq_api_key)
 
 #modified
 if "messages" not in st.session_state:

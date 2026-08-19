@@ -1,0 +1,23 @@
+# Virtual Environments
+.venv/
+venv/
+env/
+
+# API Keys & Secrets
+API.txt
+.env
+*.env
+
+# Data & Models
+data/
+datasets/
+models/
+*.pkl
+*.h5
+*.pt
+*.onnx
+
+# Python Cache & Notebook Checkpoints
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
