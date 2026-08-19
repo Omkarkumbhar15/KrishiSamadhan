@@ -1,0 +1,4 @@
+cd E:\Krishisamadhan
+.\.venv\Scripts\Activate.ps1
+pip install streamlit
+python -m streamlit run app.py
